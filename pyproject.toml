@@ -1,0 +1,7 @@
+[project]
+name = "de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
