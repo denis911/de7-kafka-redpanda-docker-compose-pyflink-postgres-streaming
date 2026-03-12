@@ -114,6 +114,7 @@ Start Redpanda:
 docker compose up redpanda -d
 ```
 
+Detached mode -d: if we start it as docker compose up redpanda -d then we get our shell back, otherwise we need to start a new shell.
 Verify it's running:
 
 ```bash
