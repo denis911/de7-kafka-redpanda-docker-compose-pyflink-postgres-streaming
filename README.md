@@ -121,7 +121,6 @@ Verify it's running:
 docker compose ps
 ```
 
-```
-NAME                IMAGE                           SERVICE    STATUS
+```    SERVICE    STATUS
 workshop-redpanda   redpandadata/redpanda:v25.3.9   redpanda   Up
 ```
