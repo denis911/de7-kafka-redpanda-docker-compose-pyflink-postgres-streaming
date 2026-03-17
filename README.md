@@ -121,6 +121,38 @@ Verify it's running:
 docker compose ps
 ```
 
+Should be something like this in terminal
+
 ```    SERVICE    STATUS
 workshop-redpanda   redpandadata/redpanda:v25.3.9   redpanda   Up
+```
+
+## Save events to PostgreSQL
+
+Printing to the screen is fine for debugging, but let's save events to a
+database. Add the PostgreSQL service to `docker-compose.yml`:
+
+```yaml
+  postgres:
+    image: postgres:18
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+```
+
+Start it:
+
+```bash
+docker compose up postgres -d
+```
+
+Connect to PostgreSQL. With `pgcli`:
+
+```bash
+uvx pgcli -h localhost -p 5432 -U postgres -d postgres
+# password: postgres
 ```
