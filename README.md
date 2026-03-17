@@ -156,3 +156,33 @@ Connect to PostgreSQL. With `pgcli`:
 uvx pgcli -h localhost -p 5432 -U postgres -d postgres
 # password: postgres
 ```
+
+Create a table for our events:
+
+```sql
+CREATE TABLE processed_events (
+    PULocationID INTEGER,
+    DOLocationID INTEGER,
+    trip_distance DOUBLE PRECISION,
+    total_amount DOUBLE PRECISION,
+    pickup_datetime TIMESTAMP
+);
+```
+
+Install the PostgreSQL client library:
+
+```bash
+uv add psycopg2-binary
+```
+
+After notebooks finished, check PostgreSQL CLI:
+
+```sql
+SELECT count(*) FROM processed_events;
+```
+
+```bash
+ count
+-------
+  1000
+```
