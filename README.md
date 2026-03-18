@@ -1272,7 +1272,7 @@ How many trips have `trip_distance` > 5?
 
 - 6506
 - 7506
-- 8506
+- 8506 == 8506
 - 9506
 
 DK - my comments:
@@ -1306,7 +1306,7 @@ uv run python src/producers/green_producer.py
 STEP 7: Get a clean row count in postgres:
 
 ```SQL
-SELECT count(*) FROM processed_events WHERE `trip_distance` > 5;
+SELECT count(*) FROM processed_events WHERE trip_distance > 5;
 ```
 
 ### Part 2: PyFlink (Questions 4-6)
