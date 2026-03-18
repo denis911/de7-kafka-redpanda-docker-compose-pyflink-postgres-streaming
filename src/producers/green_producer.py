@@ -46,7 +46,7 @@ for _, row in df.iterrows():
     ride = ride_from_row(row)
     producer.send(topic_name, value=ride)
     # print(f"Sent: {ride}") # no need to print all - output is noisy...
-    time.sleep(0.01)
+    # time.sleep(0.01) # I guess I can switch it off for faster upload of 1M rows...
 
 producer.flush()
 
