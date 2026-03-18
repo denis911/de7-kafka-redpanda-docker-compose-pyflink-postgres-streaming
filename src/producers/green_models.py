@@ -1,5 +1,6 @@
 import json
 import dataclasses
+import pandas as pd
 
 from dataclasses import dataclass
 
@@ -33,7 +34,8 @@ def ride_from_row(row):
         lpep_dropoff_datetime=int(row['lpep_dropoff_datetime'].timestamp() * 1000),
         PULocationID=int(row['PULocationID']),
         DOLocationID=int(row['DOLocationID']),
-        passenger_count=int(row['passenger_count']),
+        # passenger_count=int(row['passenger_count']), # If NaN then kafka complains...
+        passenger_count=int(0 if pd.isna(row['passenger_count']) else row['passenger_count']),
         trip_distance=float(row['trip_distance']),
         tip_amount=float(row['tip_amount']),
         total_amount=float(row['total_amount']),
