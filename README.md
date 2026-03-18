@@ -1204,6 +1204,49 @@ How long did it take to send the data?
 - 120 seconds
 - 300 seconds
 
+DK - comments:
+
+I need to create a new table in postgres for green taxi data as cols are different now:
+
+STEP 0: Start all containers - in a new terminal:
+
+```bash
+docker compose up -d
+```
+
+STEP 1: Create a topic called `green-trips` - in a new terminal:
+
+```bash
+docker exec -it workshop-redpanda-1 rpk topic create green-trips
+```
+
+STEP 2: Launch postgres cli and create new database - in a new terminal:
+
+```bash
+uvx pgcli -h localhost -p 5432 -U postgres -d postgres
+# password: postgres
+```
+
+and
+
+```bash
+CREATE TABLE processed_events (
+    lpep_pickup_datetime TIMESTAMP,
+    lpep_dropoff_datetime TIMESTAMP,    
+    PULocationID INTEGER,
+    DOLocationID INTEGER,
+    passenger_count INTEGER,   
+    trip_distance DOUBLE PRECISION,
+    tip_amount DOUBLE PRECISION,
+    total_amount DOUBLE PRECISION,
+);
+```
+
+then check total rows injected:
+
+```SQL
+SELECT count(*) FROM processed_events;
+```
 
 ### Question 3. Consumer - trip distance
 
