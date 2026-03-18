@@ -1137,7 +1137,25 @@ docker exec -it workshop-redpanda-1 rpk version
 ```
 
 What version of Redpanda are you running?
+NB - use ```docker compose ps --format "{{.Name}}"``` command,
+in my case actual container name is  
+de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming-redpanda-1
+and correct command is:
 
+```bash
+docker exec -it de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming-redpanda-1 rpk version
+```
+
+which outputs something like:
+
+```txt
+$ docker exec -it de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming-redpanda-1 rpk version
+rpk version: v25.3.9
+Git ref:     836b4a36ef6d5121edbb1e68f0f673c2a8a244e2
+Build date:  2026 Feb 26 07 48 21 Thu
+OS/Arch:     linux/amd64
+Go version:  go1.24.3
+```
 
 ### Question 2. Sending data to Redpanda
 
