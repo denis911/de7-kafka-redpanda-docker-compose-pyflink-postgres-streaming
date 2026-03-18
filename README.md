@@ -1199,7 +1199,7 @@ print(f'took {(t1 - t0):.2f} seconds')
 
 How long did it take to send the data?
 
-- 10 seconds == took 9.76 seconds
+- 10 seconds == took 23.80 seconds
 - 60 seconds
 - 120 seconds
 - 300 seconds
@@ -1258,7 +1258,7 @@ After couple of bugs in the parquet I got
 
 ```txt
 $ uv run python src/producers/green_producer.py
-took 9.76 seconds
+took 23.80 seconds
 ```
 
 ### Question 3. Consumer - trip distance
