@@ -1217,7 +1217,7 @@ docker compose up -d
 STEP 1: Create a topic called `green-trips` - in a new terminal:
 
 ```bash
-docker exec -it workshop-redpanda-1 rpk topic create green-trips
+docker exec -it de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming-redpanda-1 rpk topic create green-trips
 ```
 
 STEP 2: Launch postgres cli and create new database - in a new terminal:
