@@ -24,6 +24,16 @@ wheels = [
 ]
 
 [[package]]
+name = "apache-flink"
+version = "1.9.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "py4j" },
+    { name = "python-dateutil" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/66/d6/0795a8bedeb0b5154b334cb6a50b1bea8963eef5613fd1f667537aecdf47/apache-flink-1.9.3.tar.gz", hash = "sha256:65ad0188a6a028265add28f45680cd89ab6928ea7f34dcaaa4cb9fa878de3cd3", size = 251175230, upload-time = "2020-04-24T02:08:45.359Z" }
+
+[[package]]
 name = "appnope"
 version = "0.1.4"
 source = { registry = "https://pypi.org/simple" }
@@ -300,20 +310,24 @@ name = "de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "apache-flink" },
     { name = "kafka-python" },
     { name = "notebook" },
     { name = "pandas" },
     { name = "psycopg2-binary" },
     { name = "pyarrow" },
+    { name = "pyflink" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "apache-flink", specifier = ">=1.9.3" },
     { name = "kafka-python", specifier = ">=2.3.0" },
     { name = "notebook", specifier = ">=7.5.5" },
     { name = "pandas", specifier = ">=3.0.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.11" },
     { name = "pyarrow", specifier = ">=23.0.1" },
+    { name = "pyflink", specifier = ">=1.0" },
 ]
 
 [[package]]
@@ -1196,6 +1210,15 @@ wheels = [
 ]
 
 [[package]]
+name = "py4j"
+version = "0.10.8.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/e3/1f110e6c069522ba7a8dc215ff1c343b6bc1f98d84e6d627ca2708426eaa/py4j-0.10.8.1.zip", hash = "sha256:8329bb156a0cf37be9642a2a060dbdb627b5fcb827919be65d95102daccca274", size = 1102033, upload-time = "2018-10-21T10:36:47.852Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/04/de/2d314a921ef4c20b283e1de94e0780273678caac901564df06b948e4ba9b/py4j-0.10.8.1-py2.py3-none-any.whl", hash = "sha256:51d994ae19a3eb35eaa45851081e25922500d59875606bf27ac0d40929724939", size = 196501, upload-time = "2018-10-21T10:36:45.851Z" },
+]
+
+[[package]]
 name = "pyarrow"
 version = "23.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1245,6 +1268,14 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz", hash = "sha256:600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29", size = 103492, upload-time = "2026-01-21T14:26:51.89Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl", hash = "sha256:b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992", size = 48172, upload-time = "2026-01-21T14:26:50.693Z" },
+]
+
+[[package]]
+name = "pyflink"
+version = "1.0"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f4/0f/3d82021b18abc72454dc9fdf220ce393e455b68d232d5a6d65a832e85a8e/pyflink-1.0-py3-none-any.whl", hash = "sha256:382dfa476a0bbdee2220639a0782aeafe41163748d077e57cb2206fbb4868b0d", size = 37857, upload-time = "2019-03-12T10:02:05.099Z" },
 ]
 
 [[package]]
