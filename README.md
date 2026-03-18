@@ -1242,7 +1242,7 @@ CREATE TABLE processed_events (
 );
 ```
 
-then check total rows injected:
+then check total rows injected - should be 0:
 
 ```SQL
 SELECT count(*) FROM processed_events;
@@ -1275,6 +1275,39 @@ How many trips have `trip_distance` > 5?
 - 8506
 - 9506
 
+DK - my comments:
+I had to write consumer_postgres.py and run it, but we need to truncate table first and then execute  green_producer.py EXACTLY 1 time to avoid row duplications
+
+STEP 4: run the consumer_postgres.py to empty current Kafka topic:
+
+```bash
+uv run python src/producers/consumer_postgres.py 
+```
+
+STEP 5: check total row count in the postgres terminal:
+
+```SQL
+SELECT count(*) FROM processed_events;
+```
+
+Then delete all rows and check the row count again - it should be 0:
+
+```SQL
+TRUNCATE processed_events;
+SELECT count(*) FROM processed_events;
+```
+
+STEP 6: Run  green_producer.py EXACTLY 1 time:
+
+```bash
+uv run python src/producers/green_producer.py
+```
+
+STEP 7: Get a clean row count in postgres:
+
+```SQL
+SELECT count(*) FROM processed_events WHERE `trip_distance` > 5;
+```
 
 ### Part 2: PyFlink (Questions 4-6)
 

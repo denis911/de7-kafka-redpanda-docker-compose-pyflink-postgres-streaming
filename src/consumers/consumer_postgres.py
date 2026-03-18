@@ -9,7 +9,8 @@ from kafka import KafkaConsumer
 from green_models import ride_deserializer
 
 server = 'localhost:9092'
-topic_name = 'rides'
+topic_name = 'green-trips'
+# Kafka consumer that reads all messages from the green-trips topic 
 
 # Connect to PostgreSQL
 conn = psycopg2.connect(
@@ -29,20 +30,31 @@ consumer = KafkaConsumer(
     group_id='rides-to-postgres',
     value_deserializer=ride_deserializer
 )
+# (set auto_offset_reset='earliest').
 
 print(f"Listening to {topic_name} and writing to PostgreSQL...")
 
 count = 0
 for message in consumer:
     ride = message.value
-    pickup_dt = datetime.fromtimestamp(ride.tpep_pickup_datetime / 1000)
+    pickup_dt = datetime.fromtimestamp(ride.lpep_pickup_datetime / 1000)
+    dropoff_dt = datetime.fromtimestamp(ride.lpep_dropoff_datetime / 1000)
     cur.execute(
         """INSERT INTO processed_events
-           (PULocationID, DOLocationID, trip_distance, total_amount, pickup_datetime)
-           VALUES (%s, %s, %s, %s, %s)""",
-        (ride.PULocationID, ride.DOLocationID,
-         ride.trip_distance, ride.total_amount, pickup_dt)
+           (lpep_pickup_datetime,
+            lpep_dropoff_datetime,
+            PULocationID,
+            DOLocationID,
+            passenger_count,
+            trip_distance,
+            tip_amount,
+            total_amount
+            )
+           VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""",
+        (pickup_dt, dropoff_dt, ride.PULocationID, ride.DOLocationID,
+         ride.passenger_count, ride.trip_distance, ride.tip_amount, ride.total_amount)
     )
+
     count += 1
     if count % 100 == 0:
         print(f"Inserted {count} rows...")
