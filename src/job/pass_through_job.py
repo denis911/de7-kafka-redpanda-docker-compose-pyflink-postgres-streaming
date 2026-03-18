@@ -51,13 +51,20 @@ from pyflink.table import EnvironmentSettings, StreamTableEnvironment
 def log_processing():
     env = StreamExecutionEnvironment.get_execution_environment()
     env.enable_checkpointing(10 * 1000)  # checkpoint every 10 seconds
+    # enable_checkpointing(10 * 1000) tells Flink to take a snapshot of the job's 
+    # state every 10 seconds. A checkpoint captures the Kafka offsets (how far Flink has read) 
+    # and any in-flight data. If the job crashes, it resumes from the last checkpoint 
+    # instead of starting from the beginning.
 
     settings = EnvironmentSettings.new_instance().in_streaming_mode().build()
+    # Streaming mode here - the job runs continuously, waiting for new data
     t_env = StreamTableEnvironment.create(env, environment_settings=settings)
 
     source_table = create_events_source_kafka(t_env)
     postgres_sink = create_processed_events_sink_postgres(t_env)
 
+    # The INSERT INTO ... SELECT is the pipeline - read from Kafka, 
+    # convert the timestamp, write to PostgreSQL
     t_env.execute_sql(
         f"""
         INSERT INTO {postgres_sink}
@@ -74,3 +81,4 @@ def log_processing():
 if __name__ == '__main__':
     log_processing()
     
+
