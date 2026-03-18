@@ -1204,7 +1204,7 @@ How long did it take to send the data?
 - 120 seconds
 - 300 seconds
 
-DK - comments:
+DK - my comments:
 
 I need to create a new table in postgres for green taxi data as cols are different now:
 
@@ -1238,7 +1238,7 @@ CREATE TABLE processed_events (
     passenger_count INTEGER,   
     trip_distance DOUBLE PRECISION,
     tip_amount DOUBLE PRECISION,
-    total_amount DOUBLE PRECISION,
+    total_amount DOUBLE PRECISION
 );
 ```
 
@@ -1246,6 +1246,12 @@ then check total rows injected:
 
 ```SQL
 SELECT count(*) FROM processed_events;
+```
+
+STEP 3: Run the green_producer.py - in the new terminal:
+
+```bash
+uv run python src/producers/green_producer.py
 ```
 
 ### Question 3. Consumer - trip distance
