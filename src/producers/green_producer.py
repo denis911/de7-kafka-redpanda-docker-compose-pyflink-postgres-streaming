@@ -40,7 +40,7 @@ producer = KafkaProducer(
 )
 t0 = time.time()
 
-topic_name = 'rides'
+topic_name = 'green-trips'
 
 for _, row in df.iterrows():
     ride = ride_from_row(row)
