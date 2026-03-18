@@ -33,7 +33,7 @@ topic_name = 'rides'
 for _, row in df.iterrows():
     ride = ride_from_row(row)
     producer.send(topic_name, value=ride)
-    print(f"Sent: {ride}")
+    # print(f"Sent: {ride}") # no need to print all - output is noisy...
     time.sleep(0.01)
 
 producer.flush()
