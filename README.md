@@ -1281,7 +1281,7 @@ I had to write consumer_postgres.py and run it, but we need to truncate table fi
 STEP 4: run the consumer_postgres.py to empty current Kafka topic:
 
 ```bash
-uv run python src/producers/consumer_postgres.py 
+uv run python src/consumers/consumer_postgres.py 
 ```
 
 STEP 5: check total row count in the postgres terminal:
