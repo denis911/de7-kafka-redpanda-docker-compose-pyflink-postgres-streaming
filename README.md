@@ -1416,7 +1416,7 @@ docker compose exec -it redpanda rpk topic delete green-trips
 
 # submit flink jobs like so:
 docker compose exec jobmanager ./bin/flink run \
-    -py /opt/src/job/pass_through_job.py \
+    -py /opt/src/job/green_pass_through_job.py \
     --pyFiles /opt/src -d
 # and observe it in the Flink UI at http://localhost:8081
 
