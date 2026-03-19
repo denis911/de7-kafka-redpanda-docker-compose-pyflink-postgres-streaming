@@ -29,12 +29,16 @@ def create_events_source_kafka(t_env):
         ) WITH (
             'connector' = 'kafka',
             'properties.bootstrap.servers' = 'redpanda:29092',
-            'topic' = 'rides',
-            'scan.startup.mode' = 'latest-offset',
-            'properties.auto.offset.reset' = 'latest',
-            'format' = 'json'
+            'topic' = 'green-trips',
+            'scan.startup.mode' = 'earliest-offset',
+            'format' = 'json',
+            'json.ignore-parse-errors' = 'true',
+            'json.fail-on-missing-field' = 'false'
         );
         """
+    # 'json.ignore-parse-errors' = 'true'
+    # 'scan.startup.mode' = 'earliest-offset' VS 'scan.startup.mode' = 'latest-offset'
+    # 'properties.auto.offset.reset' = 'latest'
     t_env.execute_sql(source_ddl)
     return table_name
 
@@ -87,8 +91,8 @@ def log_processing():
         f"""
         INSERT INTO {postgres_sink}
         SELECT
-            TO_TIMESTAMP(lpep_pickup_datetime, 'yyyy-MM-dd HH:mm:ss'),
-            TO_TIMESTAMP(lpep_dropoff_datetime, 'yyyy-MM-dd HH:mm:ss'),
+            TO_TIMESTAMP(lpep_pickup_datetime, 'yyyy-MM-dd HH:mm:ss.SSS'),
+            TO_TIMESTAMP(lpep_dropoff_datetime, 'yyyy-MM-dd HH:mm:ss.SSS'),
             PULocationID,
             DOLocationID,
             passenger_count,
