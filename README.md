@@ -1373,6 +1373,13 @@ Which `PULocationID` had the most trips in a single 5-minute window?
 - 75
 - 166
 
+DK - my comments:
+
+As I am starting docker compose again, I need to check what persisted from my last run:
+
+```bash
+docker compose up -d
+```
 
 ### Question 5. Session window - longest streak
 
