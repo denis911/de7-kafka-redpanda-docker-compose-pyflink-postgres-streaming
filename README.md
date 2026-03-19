@@ -1427,6 +1427,7 @@ docker compose exec jobmanager ./bin/flink run \
 # and run in powershell terminal in win 11 --
 # docker compose exec jobmanager ./bin/flink run -py /opt/src/job/green_pass_through_job.py --pyFiles /opt/src -d
 
+uv run python src/producers/green_producer.py
 
 
 ```
