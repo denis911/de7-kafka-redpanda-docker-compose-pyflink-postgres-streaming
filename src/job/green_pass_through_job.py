@@ -18,8 +18,8 @@ def create_events_source_kafka(t_env):
     table_name = "events"
     source_ddl = f"""
         CREATE TABLE {table_name} (
-            lpep_pickup_datetime BIGINT,
-            lpep_dropoff_datetime BIGINT,
+            lpep_pickup_datetime STRING,
+            lpep_dropoff_datetime STRING,
             PULocationID INTEGER,
             DOLocationID INTEGER,
             passenger_count INTEGER,
@@ -87,8 +87,8 @@ def log_processing():
         f"""
         INSERT INTO {postgres_sink}
         SELECT
-            CAST(TO_TIMESTAMP_LTZ(lpep_pickup_datetime, 3) AS TIMESTAMP),
-            CAST(TO_TIMESTAMP_LTZ(lpep_dropoff_datetime, 3) AS TIMESTAMP),
+            TO_TIMESTAMP(lpep_pickup_datetime, 'yyyy-MM-dd HH:mm:ss'),
+            TO_TIMESTAMP(lpep_dropoff_datetime, 'yyyy-MM-dd HH:mm:ss'),
             PULocationID,
             DOLocationID,
             passenger_count,
