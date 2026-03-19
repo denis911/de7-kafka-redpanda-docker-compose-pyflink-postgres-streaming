@@ -87,8 +87,8 @@ def log_processing():
         f"""
         INSERT INTO {postgres_sink}
         SELECT
-            TO_TIMESTAMP_LTZ(lpep_pickup_datetime, 3),
-            TO_TIMESTAMP_LTZ(lpep_dropoff_datetime, 3),
+            CAST(TO_TIMESTAMP_LTZ(lpep_pickup_datetime, 3) AS TIMESTAMP),
+            CAST(TO_TIMESTAMP_LTZ(lpep_dropoff_datetime, 3) AS TIMESTAMP),
             PULocationID,
             DOLocationID,
             passenger_count,
