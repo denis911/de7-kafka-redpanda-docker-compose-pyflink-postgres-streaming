@@ -1338,6 +1338,12 @@ Important notes for the Flink jobs:
   mounted into the Flink containers at `/opt/src/job/`
 - Submit jobs with:
   `docker exec -it workshop-jobmanager-1 flink run -py /opt/src/job/your_job.py`
+  
+  or 
+
+```bash
+
+
 - The `green-trips` topic has 1 partition, so set parallelism to 1
   in your Flink jobs (`env.set_parallelism(1)`). With higher parallelism,
   idle consumer subtasks prevent the watermark from advancing.
@@ -1347,7 +1353,6 @@ Important notes for the Flink jobs:
 - If you sent data to the topic multiple times, delete and recreate
   the topic to avoid duplicates:
   `docker exec -it workshop-redpanda-1 rpk topic delete green-trips`
-
 
 ### Question 4. Tumbling window - pickup location
 
