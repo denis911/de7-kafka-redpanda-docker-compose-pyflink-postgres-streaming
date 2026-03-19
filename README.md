@@ -1388,6 +1388,7 @@ each command is better to start in its own shell:
 
 ```bash
 # start our 4 containers - build step is needed in my local win 11 pc:
+uv sync
 docker compose down -v
 docker compose build
 docker compose up -d
