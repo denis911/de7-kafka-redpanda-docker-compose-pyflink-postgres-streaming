@@ -1383,10 +1383,43 @@ Which `PULocationID` had the most trips in a single 5-minute window?
 
 DK - my comments:
 
-As I am starting docker compose again, I need to check what persisted from my last run:
+As I am starting docker compose again, I need to check what persisted from my last run,
+each command is better to start in its own shell:
 
 ```bash
+# start our 4 containers
 docker compose up -d
+
+# connect to postgres
+uvx pgcli -h localhost -p 5432 -U postgres -d postgres
+# password: postgres
+
+# create a table for green trips data
+CREATE TABLE processed_events (
+    lpep_pickup_datetime TIMESTAMP,
+    lpep_dropoff_datetime TIMESTAMP,    
+    PULocationID INTEGER,
+    DOLocationID INTEGER,
+    passenger_count INTEGER,   
+    trip_distance DOUBLE PRECISION,
+    tip_amount DOUBLE PRECISION,
+    total_amount DOUBLE PRECISION
+);
+
+# count rows in table
+SELECT count(*) FROM processed_events;
+
+# create a topic - separate shell
+docker compose exec -it redpanda rpk topic create green-trips
+# or delete it if needed and re-create later:
+docker compose exec -it redpanda rpk topic delete green-trips
+
+# submit flink jobs like so:
+docker compose exec jobmanager ./bin/flink run \
+    -py /opt/src/job/pass_through_job.py \
+    --pyFiles /opt/src -d
+# and observe it in the Flink UI at http://localhost:8081
+
 ```
 
 ### Question 5. Session window - longest streak
