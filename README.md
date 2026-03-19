@@ -1429,6 +1429,9 @@ docker compose exec jobmanager ./bin/flink run \
 
 uv run python src/producers/green_producer.py
 
+# table clean up
+TRUNCATE processed_events;
+
 
 ```
 
