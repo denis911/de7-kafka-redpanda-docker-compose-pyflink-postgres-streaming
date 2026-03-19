@@ -1137,9 +1137,13 @@ docker exec -it workshop-redpanda-1 rpk version
 ```
 
 What version of Redpanda are you running?
+
 NB - use ```docker compose ps --format "{{.Name}}"``` command,
+
 in my case actual container name is  
-de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming-redpanda-1
+
+```de7-kafka-redpanda-docker-compose-pyflink-postgres-streaming-redpanda-1```
+
 and correct command is:
 
 ```bash
