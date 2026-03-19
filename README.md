@@ -1417,11 +1417,17 @@ docker compose exec -it redpanda rpk topic create green-trips
 # or delete it if needed and re-create later:
 docker compose exec -it redpanda rpk topic delete green-trips
 
-# submit flink jobs like so:
+# submit flink jobs like so on Linux - on win 11 git bash is failing:
 docker compose exec jobmanager ./bin/flink run \
     -py /opt/src/job/green_pass_through_job.py \
     --pyFiles /opt/src -d
 # and observe it in the Flink UI at http://localhost:8081
+# src\job\green_pass_through_job.py -- real path
+# debug on windows: docker compose exec jobmanager ls -R /opt/src
+# and run in powershell terminal in win 11 --
+# docker compose exec jobmanager ./bin/flink run -py /opt/src/job/green_pass_through_job.py --pyFiles /opt/src -d
+
+
 
 ```
 
