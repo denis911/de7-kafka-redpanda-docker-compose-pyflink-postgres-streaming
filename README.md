@@ -1339,10 +1339,13 @@ Important notes for the Flink jobs:
 - Submit jobs with:
   `docker exec -it workshop-jobmanager-1 flink run -py /opt/src/job/your_job.py`
   
-  or 
+  or with docker compose:
 
-```bash
-
+  ```bash
+  docker compose exec jobmanager ./bin/flink run \
+      -py /opt/src/job/pass_through_job.py \
+      --pyFiles /opt/src -d
+  ```
 
 - The `green-trips` topic has 1 partition, so set parallelism to 1
   in your Flink jobs (`env.set_parallelism(1)`). With higher parallelism,
