@@ -1089,7 +1089,7 @@ The common pattern: your code lives in git, CI builds an artifact (JAR,
 Python zip, or Docker image), pushes it to a registry or object store, and
 then triggers the Flink cluster to pick it up.
 
-## Practice practice practice
+## Practice practice practice ...
 
 We will be using Green Taxi Trip data from October 2025:
 
@@ -1103,7 +1103,6 @@ We'll use the same infrastructure from the [workshop](../../../07-streaming/work
 Follow the setup instructions: build the Docker image, start the services:
 
 ```bash
-cd 07-streaming/workshop/
 docker compose build
 docker compose up -d
 ```
