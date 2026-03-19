@@ -1390,7 +1390,7 @@ each command is better to start in its own shell:
 # start our 4 containers - build step is needed in my local win 11 pc:
 uv sync
 docker compose down -v
-docker compose build
+docker docker compose up --build -d
 docker compose up -d
 
 # connect to postgres
