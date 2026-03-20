@@ -1383,8 +1383,8 @@ Which `PULocationID` had the most trips in a single 5-minute window?
 
 DK - my comments:
 
-As I am starting docker compose again, I need to check what persisted from my last run,
-each command is better to start in its own shell:
+As I am starting docker compose again, moving from github codespaces to my local win 11 PC,
+I needed  to check what persisted from my last run, each command is better to start in its own shell:
 
 ```bash
 # start our 4 containers - build step is needed in my local win 11 pc:
@@ -1432,8 +1432,36 @@ uv run python src/producers/green_producer.py
 # table clean up
 TRUNCATE processed_events;
 
-
 ```
+
+Now when everything works and pass-through pipeline executes we can start with question 4 itself:
+
+-- Create a PostgreSQL table with columns: window_start, PULocationID, num_trips.
+
+  ```sql
+  CREATE TABLE five_min_tumble (
+      window_start TIMESTAMP, 
+      PULocationID INTEGER,
+      num_trips INTEGER
+      );
+  ```
+
+  then query it:
+
+  ```sql
+  SELECT PULocationID, num_trips
+  FROM five_min_tumble
+  ORDER BY num_trips DESC
+  LIMIT 3;
+  ```
+
+-- Delete and re-create topic as above, run tumbling window flink job, then run green producer
+
+  ```powershell
+  docker compose exec jobmanager ./bin/flink run -py /opt/src/job/green_pass_through_job.py --pyFiles /opt/src -d
+  ```
+
+-- query 5_min_tumble table again
 
 ### Question 5. Session window - longest streak
 
