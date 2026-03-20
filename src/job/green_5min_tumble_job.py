@@ -40,7 +40,8 @@ def create_events_aggregated_sink(t_env):
         CREATE TABLE {table_name} (
             window_start TIMESTAMP, 
             PULocationID INTEGER,
-            num_trips INTEGER
+            num_trips INTEGER,
+            PRIMARY KEY (window_start, PULocationID) NOT ENFORCED
         ) WITH (
             'connector' = 'jdbc',
             'url' = 'jdbc:postgresql://postgres:5432/postgres',
