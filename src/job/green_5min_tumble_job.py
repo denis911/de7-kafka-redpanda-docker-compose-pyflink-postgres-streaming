@@ -76,7 +76,7 @@ def log_processing():
     SELECT
         window_start,
         PULocationID,
-        COUNT(*) AS num_trips
+        CAST(COUNT(*) AS INT) AS num_trips
     FROM TABLE(
         TUMBLE(TABLE {source_table}, DESCRIPTOR(event_timestamp), INTERVAL '5' MINUTE)
     )
