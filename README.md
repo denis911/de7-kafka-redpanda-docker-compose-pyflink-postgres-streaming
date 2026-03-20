@@ -1458,7 +1458,7 @@ Now when everything works and pass-through pipeline executes we can start with q
 -- Delete and re-create topic as above, run tumbling window flink job, then run green producer
 
   ```powershell
-  docker compose exec jobmanager ./bin/flink run -py /opt/src/job/green_pass_through_job.py --pyFiles /opt/src -d
+  docker compose exec jobmanager ./bin/flink run -py /opt/src/job/green_5min_tumble_job.py --pyFiles /opt/src -d
   ```
 
   then in bash terminal:
