@@ -1461,7 +1461,13 @@ Now when everything works and pass-through pipeline executes we can start with q
   docker compose exec jobmanager ./bin/flink run -py /opt/src/job/green_pass_through_job.py --pyFiles /opt/src -d
   ```
 
--- query 5_min_tumble table again
+  then in bash terminal:
+
+  ```bash
+  uv run python src/producers/green_producer.py
+  ```
+
+-- query five_min_tumble table again
 
 ### Question 5. Session window - longest streak
 
