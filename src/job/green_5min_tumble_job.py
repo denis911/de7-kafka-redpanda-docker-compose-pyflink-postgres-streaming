@@ -75,17 +75,17 @@ def log_processing():
     aggregated_table = create_events_aggregated_sink(t_env)
 
     t_env.execute_sql(f"""
-    INSERT INTO {aggregated_table}
-    SELECT
-        window_start,
-        PULocationID,
-        CAST(COUNT(*) AS INT) AS num_trips
-    FROM TABLE(
-        TUMBLE(TABLE {source_table}, DESCRIPTOR(event_timestamp), INTERVAL '5' MINUTE)
-    )
-    GROUP BY window_start, PULocationID;
+        INSERT INTO {aggregated_table}
+        SELECT
+            window_start,
+            PULocationID,
+            CAST(COUNT(*) AS INT) AS num_trips
+        FROM TABLE(
+            TUMBLE(TABLE {source_table}, DESCRIPTOR(event_timestamp), INTERVAL '5' MINUTE)
+        )
+        GROUP BY window_start, window_end, PULocationID;
 
-    """).wait()
+        """).wait()
 
 
 if __name__ == '__main__':
