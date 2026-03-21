@@ -1441,7 +1441,7 @@ Now when everything works and pass-through pipeline executes we can start with q
   ```sql
   DROP TABLE five_min_tumble;
   CREATE TABLE five_min_tumble (
-      window_start TIMESTAMPTZ,
+      window_start TIMESTAMP,
       PULocationID INTEGER,
       num_trips INTEGER,
       PRIMARY KEY (window_start, PULocationID)

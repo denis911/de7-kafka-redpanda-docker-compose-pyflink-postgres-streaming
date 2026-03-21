@@ -78,15 +78,14 @@ def log_processing():
     t_env.execute_sql(f"""
         INSERT INTO {aggregated_table}
         SELECT
-            window_start,
+            CAST(window_start AS TIMESTAMP(3)),
             PULocationID,
             CAST(COUNT(*) AS INT) AS num_trips
         FROM TABLE(
             TUMBLE(TABLE {source_table}, DESCRIPTOR(event_timestamp), INTERVAL '5' MINUTE)
         )
         GROUP BY window_start, window_end, PULocationID;
-
-        """).wait()
+    """).wait()
 
 
 if __name__ == '__main__':
