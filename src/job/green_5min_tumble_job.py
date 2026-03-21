@@ -39,7 +39,7 @@ def create_events_aggregated_sink(t_env):
     table_name = 'five_min_tumble'
     sink_ddl = f"""
         CREATE TABLE {table_name} (
-            window_start TIMESTAMP, 
+            window_start TIMESTAMP_LTZ(3), 
             PULocationID INTEGER,
             num_trips INTEGER,
             PRIMARY KEY (window_start, PULocationID) NOT ENFORCED
@@ -51,7 +51,8 @@ def create_events_aggregated_sink(t_env):
             'password' = 'postgres',
             'driver' = 'org.postgresql.Driver'
         );
-        """
+    """
+
     t_env.execute_sql(sink_ddl)
     return table_name
 

@@ -1439,11 +1439,13 @@ Now when everything works and pass-through pipeline executes we can start with q
 -- Create a PostgreSQL table with columns: window_start, PULocationID, num_trips.
 
   ```sql
+  DROP TABLE five_min_tumble;
   CREATE TABLE five_min_tumble (
-      window_start TIMESTAMP, 
+      window_start TIMESTAMPTZ,
       PULocationID INTEGER,
-      num_trips INTEGER
-      );
+      num_trips INTEGER,
+      PRIMARY KEY (window_start, PULocationID)
+  );
   ```
 
   then query it:
