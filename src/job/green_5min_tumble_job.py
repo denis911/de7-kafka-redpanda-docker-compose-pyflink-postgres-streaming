@@ -11,11 +11,11 @@
 # STEP 1 - create source from kafka:
 def create_events_source_kafka(t_env):
     table_name = "events"
-    source_ddl = f"""
+    source_ddl = source_ddl = f"""
         CREATE TABLE {table_name} (
-            lpep_pickup_datetime STRING,
+            lpep_pickup_datetime BIGINT,
             PULocationID INTEGER,
-            event_timestamp AS TO_TIMESTAMP(lpep_pickup_datetime, 'yyyy-MM-dd HH:mm:ss'),
+            event_timestamp AS TO_TIMESTAMP_LTZ(lpep_pickup_datetime, 3),
             WATERMARK FOR event_timestamp AS event_timestamp - INTERVAL '5' SECOND
         ) WITH (
             'connector' = 'kafka',
@@ -26,7 +26,8 @@ def create_events_source_kafka(t_env):
             'json.ignore-parse-errors' = 'true',
             'json.fail-on-missing-field' = 'false'
         );
-        """
+    """
+    
     # 'json.ignore-parse-errors' = 'true'
     # 'scan.startup.mode' = 'earliest-offset' VS 'scan.startup.mode' = 'latest-offset'
     # 'properties.auto.offset.reset' = 'latest'
