@@ -21,7 +21,7 @@ def create_events_source_kafka(t_env):
             'connector' = 'kafka',
             'properties.bootstrap.servers' = 'redpanda:29092',
             'topic' = 'green-trips',
-            'scan.startup.mode' = 'latest-offset',
+            'scan.startup.mode' = 'earliest-offset',
             'format' = 'json',
             'json.ignore-parse-errors' = 'true',
             'json.fail-on-missing-field' = 'false'
@@ -62,7 +62,8 @@ def log_processing():
     # Set up the execution environment
     env = StreamExecutionEnvironment.get_execution_environment()
     env.enable_checkpointing(10 * 1000)
-    env.set_parallelism(3)
+    env.set_parallelism(1) # it used to be 3 in the pass through, but with 3 job never runs...
+    # With higher parallelism, idle consumer subtasks prevent the watermark from advancing.
 
     # Set up the table environment
     settings = EnvironmentSettings.new_instance().in_streaming_mode().build()
