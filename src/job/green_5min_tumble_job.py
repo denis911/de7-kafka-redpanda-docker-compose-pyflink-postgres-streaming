@@ -15,7 +15,7 @@ def create_events_source_kafka(t_env):
         CREATE TABLE {table_name} (
             lpep_pickup_datetime STRING,
             PULocationID INTEGER,
-            event_timestamp AS TO_TIMESTAMP(lpep_pickup_datetime, 'yyyy-MM-dd HH:mm:ss.SSS'),
+            event_timestamp AS TO_TIMESTAMP(lpep_pickup_datetime, 'yyyy-MM-dd HH:mm:ss'),
             WATERMARK FOR event_timestamp AS event_timestamp - INTERVAL '5' SECOND
         ) WITH (
             'connector' = 'kafka',
